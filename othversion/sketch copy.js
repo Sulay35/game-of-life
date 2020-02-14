@@ -1,4 +1,5 @@
-
+// ART VERSION 
+// Monochroma
 var mode = prompt('1: manual generations\n2 : draw\n3: auto')
 
 function make2DArray(cols, rows){
@@ -12,15 +13,14 @@ function make2DArray(cols, rows){
 let grid;
 let cols;
 let rows;
-let resolution = 15;
+let resolution = 10;
 let generation = 0;
-function setup(){
-    let wid = windowWidth;
-    let hei = windowHeight;
-    createCanvas(wid, hei);
 
-    cols = floor(wid / resolution);
-    rows = floor(hei / resolution);
+function setup(){
+    createCanvas(700, 500);
+
+    cols = width / resolution;
+    rows = height / resolution;
 
     grid = make2DArray(cols, rows);
 

@@ -1,3 +1,6 @@
+// ART VERSION 
+// orange and perspective 
+
 
 var mode = prompt('1: manual generations\n2 : draw\n3: auto')
 
@@ -12,15 +15,14 @@ function make2DArray(cols, rows){
 let grid;
 let cols;
 let rows;
-let resolution = 15;
+let resolution = 10;
 let generation = 0;
-function setup(){
-    let wid = windowWidth;
-    let hei = windowHeight;
-    createCanvas(wid, hei);
 
-    cols = floor(wid / resolution);
-    rows = floor(hei / resolution);
+function setup(){
+    createCanvas(700, 500);
+
+    cols = width / resolution;
+    rows = height / resolution;
 
     grid = make2DArray(cols, rows);
 
@@ -43,17 +45,18 @@ function paint(){
         for(let j = 0; j < rows  ;j++){
             let x = i * resolution;
             let y = j * resolution;
-            var color = map(countNeighborsWide(grid, i, j), 0, 24, 255, 0, 1);
+            var color = map(countNeighbors(grid, i, j), 0, 15, 255, 0, 15);
+
             if(grid[i][j] == 1){
-                fill(color);
+                fill(color, 105, 0, 255);
                 // stroke(0);
                 // rect(x, y, resolution-1, resolution-1)
-                ellipse(x, y, resolution)
+                ellipse(x, y, 15)
             }else{
                 fill(255);
                 // stroke(0);
                 // rect(x, y, resolution-1, resolution-1)
-                ellipse(x, y, resolution)
+                ellipse(x, y, 15)
             }
         }
     }
@@ -103,25 +106,6 @@ function countNeighbors(grid, x, y){
     return sum;
 }
 
-function countNeighborsWide(grid, x, y){
-    let sum = 0;
-    for(let i = -2; i < 3 ; i++){
-        for(let j = -2; j < 3 ; j++){
-            let col = (x + i + cols) % cols;
-            let row = (y + j + rows) % rows;
-
-            sum += grid[col][row];
-        }
-    }
-
-    sum -= grid[x][y];
-    return sum;
-}
-
-
-
-
-// Modes
 var spacePressed = false;
 
 if(mode == 1 ){
